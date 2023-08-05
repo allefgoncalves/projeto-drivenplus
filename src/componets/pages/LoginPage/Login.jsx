@@ -12,7 +12,8 @@ export default function LoginPage(){
     const { setToken, setImgUser} = useContext(UseContext);
 
     function verifica(y){
-        if(y==null){    //verificar se ja tem conta
+        console.log(y)
+        if(y=="null"){    //verificar se ja tem conta
             navigate('/subscriptions');
         }else{
             navigate('/home');  
@@ -22,7 +23,7 @@ export default function LoginPage(){
     useEffect(() => {
         let x = localStorage.getItem("token");
         let y = localStorage.getItem("membership");
-        console.log(x);
+       
         if(x !=undefined){
             console.log(x);
             setToken(x);
@@ -42,7 +43,6 @@ export default function LoginPage(){
             setToken(resp.data.token);
             localStorage.setItem("token", resp.data.token);
             localStorage.setItem("membership", resp.data.membership);
-            setImgUser(resp.data.image);
             verifica(y); 
         });
         promise.catch( erro =>{

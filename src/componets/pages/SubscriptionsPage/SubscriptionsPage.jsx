@@ -5,7 +5,7 @@ import logoVerde from './../../../assets/logo-plano-Verde.png';
 
 import styled from 'styled-components';
 import { useState, useContext, useEffect} from 'react';
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import UseContext from './../../contexts/UseContext';
 
@@ -28,13 +28,9 @@ export default function SubscriptionsPage(){
     
         promise.catch( erro =>{
             alert(erro.response.data.message);
-            console.log(erro);
         });
 
       },[]);
-
-
-
     return(
         <Containerhome>
             <Div>

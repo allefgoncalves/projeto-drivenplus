@@ -9,7 +9,7 @@ import Modal from 'react-modal';
 
 export default function Card(){
     const [form, setForm] = useState({membershipId:"", cardName:"",cardNumber:"", securityNumber:"", expirationDate:""});
-    const { token } = useContext(UseContext);
+    const { token, setPlano } = useContext(UseContext);
     const [modalIsOpen, setIsOpen] = React.useState(false);
     Modal.setAppElement('#root');
 
@@ -30,7 +30,7 @@ export default function Card(){
         e.preventDefault();
         promise.then( resp => {
             console.log(resp.data);
-            navigate('/');
+            setPlano(resp.data);
         });
   
         promise.catch( erro => {
@@ -47,7 +47,7 @@ export default function Card(){
     return(
         <Card_Dados>
              <form onSubmit={plano}>
-             <Input
+                <Input
                     type="text"
                     placeholder="Nome impresso no cartão"
                     required
@@ -61,7 +61,7 @@ export default function Card(){
                     onChange={ e => setForm({...form, cardNumber:e.target.value}) }
                     value={form.cardNumber}
                 />
-                <div>
+                <Div1>
                     <InputPequeno
                         type="text"
                         placeholder="CVC"
@@ -76,7 +76,7 @@ export default function Card(){
                         onChange={ e => setForm({...form, expirationDate:e.target.value}) }
                         value={form.expirationDate}
                     />
-                </div>
+                </Div1>
                 <Button type="submit">Cadastrar</Button>
             </form>
             <Modal
@@ -95,12 +95,36 @@ export default function Card(){
 }
 
 const Card_Dados =styled.div`
-    background-color: yellow;
-
+    form{
+        display: flex;
+        justify-content: center;
+        align-items:center ;
+        flex-direction: column ;
+    }
+`
+const Div1 =styled.div`
+    width: 315px;
+    display: flex;
+    justify-content: center;
+    align-items:start ;
 `
 
-const InputPequeno =styled.div`
+const InputPequeno =styled.input`
+    height: 45px;
+    width: 129px;
+    border: 1px solid #DBDBDB;
+    background-color: #FFFFFF;
+    color: black;
+    font-family: 'Lexend Deca', sans-serif;
+    padding: 0px 10px;
+    margin-bottom: 10px;
+    margin-right: 2px;
+    border-radius: 4px;
 
+    ::placeholder {
+        color: #BEBEBE;
+        font-family: 'Lexend Deca', sans-serif;
+    }
 `
 
 const Botoes =styled.div`
